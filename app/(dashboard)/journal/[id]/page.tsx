@@ -22,7 +22,7 @@ const EntryPage = async ({params}) => {
     const entry = await getEntry(params.id)
     //const { mood, summary, subject, color, negative } = entry?.analysis;
     const anaylsisData =[
-        {name: 'Subjext', value: 'subject'},
+        {name: 'Subject', value: 'subject'},
         {name: 'Summary', value: 'summary'},
         {name: 'Mood', value: 'mood'},
         {name: 'Negative', value: 'negative' ? "True" : "False"}
