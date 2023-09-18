@@ -1,5 +1,5 @@
 import { OpenAI } from 'langchain/llms/openai'
-import { StructuredOutputParser } from 'langchain/output_parsers'
+import { StructuredOutputParser, OutputFixingParser } from 'langchain/output_parsers'
 import z from 'zod';
 import { PromptTemplate } from 'langchain/prompts';
 
@@ -45,8 +45,13 @@ export const analyze = async (entry) => {
     const result = await model.call(input)
 
     try {
-        return parser.parse(result)
-    } catch (e) {
-        console.log(e)
-    }
+        return parser.parse(output)
+      } catch (e) {
+        const fixParser = OutputFixingParser.fromLLM(
+          new OpenAI({ temperature: 0, modelName: 'gpt-3.5-turbo' }),
+          parser
+        )
+        const fix = await fixParser.parse(output)
+        return fix
+      }
 }

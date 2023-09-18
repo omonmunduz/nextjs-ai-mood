@@ -18,13 +18,13 @@ export const PATCH = async (request: Request, {params}) => {
         }
     })
 
-    /*const analysis = await analyze(updatedEntry.content)
+   /* const analysis = await analyze(updatedEntry.content)
                         // upsert means - update if u find it
     await prisma.analysis.upsert({
         where: {
             entryId: updatedEntry.id 
         },
-        data: {
+        create: {
             entryId: updatedEntry.id,
             ...analysis,
         },

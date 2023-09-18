@@ -6,7 +6,8 @@ export const updateEntry = async (id, content) => {
     const res = await fetch(new Request(createURL(`/api/journal/${id}`), {
         method: 'PATCH',
         body: JSON.stringify({content}),
-    }))
+    }),)
+    console.log(content, 'content')
 
     if(res.ok) {
         const data = await res.json()
